@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 
+
 public class ReticleController : MonoBehaviour
 {
     [Header("Scene References:")]
@@ -24,8 +25,6 @@ public class ReticleController : MonoBehaviour
     [SerializeField]
     private FurnitureConfig selectedFurnitureConfig;
 
-    public GameManager gameManager;
-
     private GameObject reticle;
     private List<ARRaycastHit> hits = new List<ARRaycastHit>();
     // Start is called before the first frame update
@@ -39,6 +38,8 @@ public class ReticleController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
         Vector2 center = ScreenUtils.GetCenterOfScreen();
 
         if (raycastManager.Raycast(center, hits, UnityEngine.XR.ARSubsystems.TrackableType.PlaneWithinBounds))
@@ -82,7 +83,7 @@ public class ReticleController : MonoBehaviour
             {
                 if (selectedFurnitureConfig.FitsOnPlane(hitPlane) && selectedFurnitureConfig.IsCorrectPlaneType(hitPlane))
                 {
-                    Instantiate(selectedFurnitureConfig.prefab, reticle.transform).GetComponent<PrefabScript>().Init(gameManager);
+                    Instantiate(selectedFurnitureConfig.prefab, reticle.transform);
                 }
             }
             else
